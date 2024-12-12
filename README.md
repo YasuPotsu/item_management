@@ -1,43 +1,28 @@
 ## 商品管理システム
 
-### 環境構築手順
+### 概要
 
-* Gitクローン
-* .env.example をコピーして .env を作成
-* MySQLのデータベース作成（名前：item_management）
-* Macの場合 .env の DB_PASSWORD を root に修正（Windowsは修正不要）
+このシステムでは、店舗で扱う商品の在庫管理を行うことができます。
 
-    ```INI
-    DB_PASSWORD=root
-    ```
+商品の新規登録から編集、削除、画像添付を行うことができます。
 
-* APP_KEY生成
+### 主な機能
+ 
+ - ログイン・ログアウト機能
+ - 商品画面一覧
+ - 商品新規登録、編集、削除、画像添付機能
 
-    ```console
-    php artisan key:generate
-    ```
+ ### 開発環境
 
-* Composerインストール
+PHP 8.2.12
+Laravel 10.13.5
+MySQL 15.1
 
-    ```console
-    composer install
-    ```
+### 設計書
 
-* フロント環境構築
+[設計書ページへ](https://drive.google.com/drive/folders/18awoRKqZsgByqz9mtoqql0eqR9GMU6Mg?usp=sharing)
 
-    ```console
-    npm ci
-    npm run build
-    ```
+### テストアカウント情報
 
-* マイグレーション
-
-    ```console
-    php artisan migrate
-    ```
-
-* 起動
-
-    ```console
-    php artisan serve
-    ```
+メールアドレス：tech_g@example.com
+パスワード：tech.is.01
