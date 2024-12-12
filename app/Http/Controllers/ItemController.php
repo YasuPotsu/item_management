@@ -35,66 +35,52 @@ class ItemController extends Controller
      */
     public function add(ItemRequest $request)
     {
-        // POSTリクエストのとき
-        if ($request->isMethod('post')) {
-            $imagePath = null;
-            
-            // 画像のアップロード
+        $imagePath = null;
+
+        // 画像のアップロード処理
+        if ($request->hasFile('image')) {
             try {
-                if ($request->hasFile('image')) {
-                    $image = $request->file('image');
-                    $imagePath = base64_encode(file_get_contents($image->getRealPath())); //画像を保存
-                }
+                $image = $request->file('image');
+                $imagePath = base64_encode(file_get_contents($image->getRealPath())); //画像をBase64エンコード
             } catch (\Exception $e) {
+                Log::error('画像アップロードエラー:' . $e->getMessage());
                 return redirect()->back()->withErrors(['image' => '画像のアップロードエラー']);
             }
-
-            // 商品を登録
-            Item::create([
-                'user_id' => Auth::user()->id,
-                'name' => $request->name,
-                'type' => $request->type,
-                'detail' => $request->detail,
-                'image' => $imagePath, //画像パスを保存
-            ]);
-
-            return redirect('/items')->with('success', '商品を登録しました！');
         }
+        // 商品を登録
+        Item::create([
+            'user_id' => Auth::user()->id,
+            'name' => $request->name,
+            'type' => $request->type,
+            'detail' => $request->detail,
+            'image' => $imagePath, //画像パスを保存
+        ]);
 
-        return view('items.add');
+        return redirect()->route('items.index')->with('success', '商品を登録しました！');
     }
 
-    // 商品編集フォーム
-    public function edit(Item $item)
-    {
-        return view('items.edit', compact('item'));
-    }
 
-    // 商品更新処理
+    // 商品更新
     public function update(ItemRequest $request, Item $item)
     {
         $item->name = $request->name;
         $item->type = $request->type;
         $item->detail = $request->detail;
-        $item->save();
 
-        // 画像更新
-        try {
-            if ($request->hasFile('image')) {
-                if ($item->image) {
-                    try {
-                        Storage::disk('public')->delete($item->image);
-                    } catch (\Exception $e) {
-                        return redirect()->back()->withErrors(['image' => '古い画像の削除中にエラーが発生しました。']);
-                    }
-                }
+        // 画像の更新処理
+        if ($request->hasFile('image')) {
+            try {
+                $image = $request->file('image');
                 $item->image = base64_encode(file_get_contents($image->getRealPath()));
+            } catch (\Exception $e) {
+                Log::error('画像更新エラー:' . $e->getMessage());
+                return redirect()->back()->withErrors(['image' => '画像の更新中にエラーが発生しました。']);
             }
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['image' => '画像の更新中にエラーが発生しました。']);
         }
 
-        $item->update($request->all());
+        // データベースに更新を反映
+        $item->save();
+
         return redirect()->route('items.index')->with('success', '商品情報を更新しました。');
     }
 }
