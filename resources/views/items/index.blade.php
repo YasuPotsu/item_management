@@ -40,13 +40,13 @@
                             <td>{{ $item->detail }}</td>
                             <td>
                                 @if ($item->image)
-                                <img src="data:image/jpeg,png,jpg,gif;base64,{{ $item->image }}" alt="{{ $item->name }}" style="width: 100px;">
+                                <a href="{{ route('items.show', $item->id) }}">画像</a>
                                 @else
                                 <p>画像なし</p>
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('items.edit' , ['item' => $item->id]) }}" class="btn btn-primary">編集</a>
+                                <a href="{{ route('items.edit' , ['id' => $item->id]) }}" class="btn btn-primary">編集</a>
                             </td>
                         </tr>
                         @endforeach

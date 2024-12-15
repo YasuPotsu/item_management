@@ -21,7 +21,7 @@
 
             <!-- 商品登録フォーム -->
             <div class="card card-primary">
-                <form method="POST" action="{{ route('items.add') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('items.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">

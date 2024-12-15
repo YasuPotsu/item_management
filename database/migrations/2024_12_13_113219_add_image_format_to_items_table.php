@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('items', function (Blueprint $table) {
-            // imageカラムをテキスト型に変更
-            $table->text('image')->nullable()->change();
+            $table->text('image_format')->nullable()->after('image'); //画像形式用のカラムを追加
         });
     }
 
@@ -23,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('items', function (Blueprint $table) {
-            $table->text('image')->nullable(false)->change(); // nullable(false)に戻す
+            $table->dropColumn('image_format'); // ロールバック時に削除
         });
     }
 };

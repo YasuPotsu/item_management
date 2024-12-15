@@ -24,5 +24,5 @@ MySQL 15.1
 
 ### テストアカウント情報
 
-メールアドレス：tech_g@example.com
+メールアドレス：tech-g@example.com
 パスワード：tech.is.01

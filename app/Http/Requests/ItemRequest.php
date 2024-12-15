@@ -11,7 +11,7 @@ class ItemRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true; //全てのリクエストを許可
     }
 
     /**
@@ -24,8 +24,9 @@ class ItemRequest extends FormRequest
         return [
             'name' => 'required|max:100',
             'type' => 'nullable|max:100',
-            'detail' => 'nullable|max:100',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'detail' => 'nullable|max:300',
+            'image' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
         ];
     }
+
 }

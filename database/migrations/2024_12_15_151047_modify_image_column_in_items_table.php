@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('items', function (Blueprint $table) {
-            // imageカラムをテキスト型に変更
-            $table->text('image')->nullable()->change();
+            $table->text('image')->change(); // ここでテキスト型に変更
         });
     }
 
@@ -23,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('items', function (Blueprint $table) {
-            $table->text('image')->nullable(false)->change(); // nullable(false)に戻す
+            $table->string('image', 255)->change(); // 元に戻す場合にはvercharに戻す
         });
     }
 };
