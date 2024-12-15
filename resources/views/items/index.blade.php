@@ -25,7 +25,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>名前</th>
+                            <th>商品名</th>
                             <th>種別</th>
                             <th>詳細</th>
                             <th>画像</th>
