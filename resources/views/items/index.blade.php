@@ -40,7 +40,7 @@
                             <td>{{ $item->detail }}</td>
                             <td>
                                 @if ($item->image)
-                                <a href="{{ route('items.show', $item->id) }}">画像</a>
+                                <a href="{{ route('items.show', $item->id) }}" class="btn btn-warning">画像</a>
                                 @else
                                 <p>画像なし</p>
                                 @endif
