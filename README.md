@@ -22,7 +22,7 @@
 
 [設計書ページへ](https://drive.google.com/drive/folders/18awoRKqZsgByqz9mtoqql0eqR9GMU6Mg?usp=sharing)
 
-### テストアカウント情報
+<!-- ### テストアカウント情報
 
 メールアドレス：tech-g@example.com
-パスワード：tech.is.01
+パスワード：tech.is.01 -->
